@@ -1,0 +1,48 @@
+_schema-version: "3.1"
+ID: bookshop
+version: 1.0.0
+description: "CAP Bookshop Demo"
+
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+
+modules:
+  # ---------- SERVICE MODULE ----------
+  - name: bookshop-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: bookshop-db
+
+  # ---------- DATABASE MODULE ----------
+  - name: bookshop-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: bookshop-db
+
+resources:
+  # ---------- HANA HDI CONTAINER ----------
+  - name: bookshop-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
