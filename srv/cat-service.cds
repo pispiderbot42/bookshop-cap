@@ -13,20 +13,18 @@ annotate CatalogService.Books with @(
       TypeNamePlural: 'Books',
       Title: { Value: title }
     },
-    SelectionFields: [ title, author_ID ],
+    SelectionFields: [ title ],
     LineItem: [
-      { Value: ID },
-      { Value: title },
-      { Value: author.name, Label: 'Author' },
-      { Value: stock },
-      { Value: price }
-    ]
+      { $Type: 'UI.DataField', Value: ID, Label: 'ID', ![@UI.Importance]: #High },
+      { $Type: 'UI.DataField', Value: title, Label: 'Title', ![@UI.Importance]: #High },
+      { $Type: 'UI.DataField', Value: author_ID, Label: 'Author ID', ![@UI.Importance]: #High },
+      { $Type: 'UI.DataField', Value: stock, Label: 'Stock', ![@UI.Importance]: #High },
+      { $Type: 'UI.DataField', Value: price, Label: 'Price', ![@UI.Importance]: #High }
+    ],
+    PresentationVariant: {
+      Text: 'Default',
+      SortOrder: [{ Property: title, Descending: false }],
+      Visualizations: ['@UI.LineItem']
+    }
   }
 );
-
-annotate CatalogService.Books with {
-  ID     @title: 'ID';
-  title  @title: 'Title';
-  stock  @title: 'Stock';
-  price  @title: 'Price';
-};
