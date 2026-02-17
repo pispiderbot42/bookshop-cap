@@ -2,11 +2,11 @@
   "name": "bookshop",
   "version": "1.0.0",
   "dependencies": {
-    "@sap/cds": "^7",
+    "@sap/cds": "^8",
     "express": "^4"
   },
   "devDependencies": {
-    "@sap/cds-dk": "^7",
+    "@sap/cds-dk": "^9",
     "sqlite3": "^5"
   },
   "scripts": {
