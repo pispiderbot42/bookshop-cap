@@ -16,12 +16,14 @@ build-parameters:
 modules:
   - name: bookshop-srv
     type: nodejs
-    path: gen/srv
+    path: srv
     parameters:
       buildpack: nodejs_buildpack
       memory: 256M
     build-parameters:
       builder: npm
+      ignore:
+        - node_modules/
     provides:
       - name: srv-api
         properties:
@@ -31,9 +33,12 @@ modules:
 
   - name: bookshop-db-deployer
     type: hdb
-    path: gen/db
+    path: db
     parameters:
       buildpack: nodejs_buildpack
+    build-parameters:
+      ignore:
+        - node_modules/
     requires:
       - name: bookshop-db
 
