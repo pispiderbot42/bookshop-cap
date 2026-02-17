@@ -14,7 +14,6 @@ build-parameters:
         - npx cds build --production
 
 modules:
-  # ---------- SERVICE MODULE ----------
   - name: bookshop-srv
     type: nodejs
     path: gen/srv
@@ -30,7 +29,6 @@ modules:
     requires:
       - name: bookshop-db
 
-  # ---------- DATABASE MODULE ----------
   - name: bookshop-db-deployer
     type: hdb
     path: gen/db
@@ -40,7 +38,6 @@ modules:
       - name: bookshop-db
 
 resources:
-  # ---------- HANA HDI CONTAINER ----------
   - name: bookshop-db
     type: com.sap.xs.hdi-container
     parameters:
