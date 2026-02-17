@@ -1,4 +1,4 @@
-ID;title;author_ID;stock;price
-1;Wuthering Heights;1;100;12.99
-2;Jane Eyre;2;50;11.99
-3;The Raven;3;333;9.99
+ID,title,author_ID,stock,price
+1,Wuthering Heights,1,100,12.99
+2,Jane Eyre,2,50,11.99
+3,The Raven,3,333,9.99
